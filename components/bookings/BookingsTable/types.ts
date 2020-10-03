@@ -1,5 +1,4 @@
-export interface Booking {
-    bookingId: number;
+export default interface BookingTableRowProps {
     womenName: string;
     womenEmail: string;
     dateTimeBooking: string;

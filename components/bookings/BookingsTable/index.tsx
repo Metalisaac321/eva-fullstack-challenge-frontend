@@ -1,14 +1,14 @@
-import { BOOKINGS, TABLE_HEAD_ITEMS } from '../constants';
+import constants from './constants';
 import { Fragment } from 'react';
-import { BookingTableRowProps } from './types';
+import BookingTableRowProps from './types';
 
 const BookingsTable = () => {
     return (
-        <table className="table-auto">
+        <table className="table-auto border">
             <thead>
                 <tr>
                     {
-                        TABLE_HEAD_ITEMS.map((tableHeadItem) => (
+                        constants.TABLE_HEAD_ITEMS.map((tableHeadItem) => (
                             <th key={tableHeadItem} className="px-4 py-2">{tableHeadItem}</th>
                         ))
                     }
@@ -16,7 +16,7 @@ const BookingsTable = () => {
             </thead>
             <tbody>
                 {
-                    BOOKINGS.map(({ bookingId, ...booking }) => (
+                    constants.BOOKINGS.map(({ bookingId, ...booking }) => (
                         <Fragment key={bookingId}>
                             <BookingTableRow {...booking} />
                         </Fragment>

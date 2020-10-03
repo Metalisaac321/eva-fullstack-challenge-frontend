@@ -1,6 +1,6 @@
-import { Booking } from "./types";
+import Booking from "../types";
 
-export const TABLE_HEAD_ITEMS: string[] = [
+const TABLE_HEAD_ITEMS: string[] = [
     'Woman Name',
     'Email',
     'Date Time Booking',
@@ -8,7 +8,7 @@ export const TABLE_HEAD_ITEMS: string[] = [
     'Consumed Medications',
 ];
 
-export const BOOKINGS: Booking[] = [
+const BOOKINGS: Booking[] = [
     {
         bookingId: 0,
         womenName: 'Mina Cummings',
@@ -43,3 +43,8 @@ export const BOOKINGS: Booking[] = [
     },
 
 ]
+
+export default {
+    TABLE_HEAD_ITEMS,
+    BOOKINGS,
+}

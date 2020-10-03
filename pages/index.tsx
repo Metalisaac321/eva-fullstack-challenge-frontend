@@ -1,6 +1,5 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
 
-export default ({ items }: InferGetStaticPropsType<typeof getStaticProps>) => {
+export default () => {
   // const { data, error } = useSWR('users', fetcher, { initialData: items })
 
   return (
@@ -8,10 +7,4 @@ export default ({ items }: InferGetStaticPropsType<typeof getStaticProps>) => {
       Login
     </p>
   )
-}
-
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: { items: [] }
-  }
 }
