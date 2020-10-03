@@ -1,4 +1,5 @@
-interface Booking {
+
+export interface Booking {
     bookingId: number;
     womenName: string;
     womenEmail: string;
@@ -7,4 +8,4 @@ interface Booking {
     consumedMedications: string;
 }
 
-export default Booking;
+

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .gradient-blue {
-    @apply h-24 bg-gradient-to-r from-teal-400 to-blue-500;
+    @apply bg-gradient-to-r from-teal-400 to-blue-500;
 }
 
 .gradient-purple-to-red {
