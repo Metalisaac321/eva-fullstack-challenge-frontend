@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
-import Link from 'next/link'
 import Head from 'next/head'
+import { evaIconInBase64 } from './constants'
 
 type Props = {
   children?: ReactNode
@@ -14,28 +14,25 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <header>
-      <nav>
-        <Link href="/">
-          <a>Home</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/about">
-          <a>About</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/users">
-          <a>Users List</a>
-        </Link>{' '}
-        | <a href="/api/users">Users API</a>
-      </nav>
-    </header>
+    <Topbar />
     {children}
-    <footer>
-      <hr />
-      <span>I'm here to stay (Footer)</span>
-    </footer>
+    <footer></footer>
   </div>
 )
+
+const Topbar = () => {
+  return (
+    <header className="justify-between items-center mx-auto border mb-4 h-20 flex flex-row text-white gradient-purple-to-red">
+      <img
+        className="w-32 h-12"
+        src={evaIconInBase64}
+        alt="eva-icon"
+      />
+      <button className="text-2xl hover:text-blue-400 mr-4 focus:outline-none">
+        Logout
+      </button>
+    </header>
+  )
+}
 
 export default Layout

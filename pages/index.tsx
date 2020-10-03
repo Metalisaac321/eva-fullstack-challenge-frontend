@@ -1,20 +1,17 @@
-import Link from 'next/link'
-import Layout from '../components/Layout'
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
 
-const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello Next.js 👋</h1>
-    <p>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
+export default ({ items }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  // const { data, error } = useSWR('users', fetcher, { initialData: items })
+
+  return (
+    <p className="text-xl2">
+      Login
     </p>
-    <h1>
-      <button className="btn-blue">
-        Button
-      </button>
-    </h1>
-  </Layout>
-)
+  )
+}
 
-export default IndexPage
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: { items: [] }
+  }
+}
