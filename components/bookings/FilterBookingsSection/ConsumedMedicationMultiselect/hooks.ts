@@ -20,6 +20,7 @@ const useConsumedMedicationMultiselect = () => {
         value,
         onChange,
         options,
+        setOptions,
     }
 }
 

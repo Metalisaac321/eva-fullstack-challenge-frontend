@@ -1,9 +1,10 @@
 import { TABLE_HEAD_ITEMS } from './constants';
-import { Fragment } from 'react';
+import { Fragment, memo } from 'react';
 import { BookingTableProps, BookingTableRowProps } from './types';
 
 
-const BookingsTable = ({ bookings }: BookingTableProps) => {
+const BookingsTable = memo(({ bookings }: BookingTableProps) => {
+    console.log('Render BookingTable')
     return (
         <table className="table-auto border">
             <thead>
@@ -26,7 +27,7 @@ const BookingsTable = ({ bookings }: BookingTableProps) => {
             </tbody>
         </table>
     );
-}
+});
 
 const BookingTableRow = ({ womenName, consumedMedications, clinicName, dateTimeBooking, womenEmail }: BookingTableRowProps) => (
     <tr>

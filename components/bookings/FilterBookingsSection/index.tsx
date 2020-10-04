@@ -1,26 +1,21 @@
 import ConsumedMedicationMultiselect from "./ConsumedMedicationMultiselect"
-import useDateBookingInput from "./DateBookingInput/hooks";
 import DateBookingInput from "./DateBookingInput";
 import FilterTypeConsumedMedicationsRadioButtons from './FilterTypeConsumedMedicationsRadioButtons'
-import useFilterTypeConsumedMedicationsRadioButtons from "./FilterTypeConsumedMedicationsRadioButtons/hooks";
-import useConsumedMedicationMultiSelect from "./ConsumedMedicationMultiselect/hooks";
+import { FilterBookingsSectionProps } from './types'
 
-const Index = () => {
-    const handleOnClickFilterButton = () => {
-        console.log('Ready to filter')
-    }
-
-    const filterTypeConsumedMedicationsRadioButtonsProps = useFilterTypeConsumedMedicationsRadioButtons();
-    const dateBookingProps = useDateBookingInput();
-    const consumedMedicationMultiselectProps = useConsumedMedicationMultiSelect();
-
+const Index = ({
+    consumedMedicationMultiselectProps,
+    dateBookingInputProps,
+    filterTypeConsumedMedicationsRadioButtonsProps,
+    handleOnClickFilterButton,
+}: FilterBookingsSectionProps) => {
     return (
         <div className="mb-12 border p-3">
             <p className="text-3xl text-center mb-6">
                 Filter Bookings
             </p>
             <div className="grid grid-cols-3 gap-4">
-                <DateBookingInput {...dateBookingProps} />
+                <DateBookingInput {...dateBookingInputProps} />
                 <div className="justify-self-center self-end">
                     <button
                         type="button"

@@ -1,4 +1,3 @@
-
 export interface Booking {
     bookingId: number;
     womenName: string;
@@ -7,5 +6,3 @@ export interface Booking {
     clinicName: string;
     consumedMedications: string;
 }
-
-

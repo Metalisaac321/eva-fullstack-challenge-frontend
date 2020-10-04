@@ -1,32 +1,14 @@
 import { useState } from "react"
 import { BOOKINGS } from "./BookingsTable/constants"
-import { Booking } from "./types"
-
-interface FilterBooking {
-    dateBooking: string;
-    filterMode: string;
-    consumedMedications: any[];
-    option
-
-}
-interface BookingState {
-    bookings: Booking[];
-}
-
-const initialBookingState: BookingState = {
-    bookings: BOOKINGS,
-}
+import useFilterBookingsSection from "./FilterBookingsSection/hooks"
 
 const useBookings = () => {
-    const [bookingsState, setBookingState] = useState(initialBookingState)
-
-    const setBookings = (bookings: Booking[]) => {
-        setBookingState({ ...bookingsState, ...bookings })
-    }
+    const filterBookingsSectionsProps = useFilterBookingsSection();
+    const [bookings, setBookings] = useState(BOOKINGS);
 
     return {
-        bookings: bookingsState.bookings,
-        setBookings,
+        filterBookingsSectionsProps,
+        bookings,
     }
 }
 

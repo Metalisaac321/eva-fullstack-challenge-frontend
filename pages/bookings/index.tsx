@@ -7,14 +7,14 @@ import FilterBookingsSection from '../../components/bookings/FilterBookingsSecti
 
 const Bookings = () => {
   const {
+    filterBookingsSectionsProps,
     bookings,
-    setBookings,
   } = useBookings();
 
   return (
     <Layout title="Bookings">
       <div className="flex flex-col px-6">
-        <FilterBookingsSection />
+        <FilterBookingsSection {...filterBookingsSectionsProps} />
         <BookingsTable bookings={bookings} />
       </div>
     </Layout>

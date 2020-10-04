@@ -1,7 +1,6 @@
 import { FilterTypeConsumedMedicationsProps } from "./types"
 
 const Index = ({ onOptionChange, selectedOption }: FilterTypeConsumedMedicationsProps) => {
-    console.log('Render RadioButtons')
     return (
         <div>
             <div className="grid grid-cols-2 justify-items-center">
