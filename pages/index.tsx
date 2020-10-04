@@ -1,5 +1,5 @@
 
-export default () => {
+const Index = () => {
   // const { data, error } = useSWR('users', fetcher, { initialData: items })
 
   return (
@@ -7,4 +7,6 @@ export default () => {
       Login
     </p>
   )
-}
+};
+
+export default Index;

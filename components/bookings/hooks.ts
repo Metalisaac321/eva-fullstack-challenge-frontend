@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { BOOKINGS } from "../BookingsTable/constants"
-import { Booking } from "../types"
+import { BOOKINGS } from "./BookingsTable/constants"
+import { Booking } from "./types"
 
 interface FilterBooking {
     dateBooking: string;
@@ -17,7 +17,7 @@ const initialBookingState: BookingState = {
     bookings: BOOKINGS,
 }
 
-export default () => {
+const useBookings = () => {
     const [bookingsState, setBookingState] = useState(initialBookingState)
 
     const setBookings = (bookings: Booking[]) => {
@@ -29,3 +29,5 @@ export default () => {
         setBookings,
     }
 }
+
+export default useBookings;

@@ -1,6 +1,7 @@
 import { FilterTypeConsumedMedicationsProps } from "./types"
 
-export default ({ onOptionChange, selectedOption }: FilterTypeConsumedMedicationsProps) => {
+const Index = ({ onOptionChange, selectedOption }: FilterTypeConsumedMedicationsProps) => {
+    console.log('Render RadioButtons')
     return (
         <div>
             <div className="grid grid-cols-2 justify-items-center">
@@ -29,4 +30,6 @@ export default ({ onOptionChange, selectedOption }: FilterTypeConsumedMedication
             </div>
         </div>
     )
-}
+};
+
+export default Index;

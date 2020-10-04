@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next'
 import Layout from '../../components/Layout'
 import fetcher from '../../utils/fetcher';
 import BookingsTable from '../../components/bookings/BookingsTable';
-import useBookings from '../../components/bookings/hooks/useBookings';
+import useBookings from '../../components/bookings/hooks';
 import FilterBookingsSection from '../../components/bookings/FilterBookingsSection';
 
 const Bookings = () => {
