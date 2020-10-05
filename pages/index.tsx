@@ -1,12 +1,12 @@
 
-const Login = () => {
+const Index = () => {
   // const { data, error } = useSWR('users', fetcher, { initialData: items })
 
   return (
-    <p className="text-xl2">
-      Loginson
+    <p className="text-xl border-2">
+      Login
     </p>
   )
-}
+};
 
-export default Login;
+export default Index;

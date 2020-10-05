@@ -1,6 +1,6 @@
 import Booking from "../types";
 
-const TABLE_HEAD_ITEMS: string[] = [
+export const TABLE_HEAD_ITEMS: string[] = [
     'Woman Name',
     'Email',
     'Date Time Booking',
@@ -8,7 +8,7 @@ const TABLE_HEAD_ITEMS: string[] = [
     'Consumed Medications',
 ];
 
-const BOOKINGS: Booking[] = [
+export const BOOKINGS: Booking[] = [
     {
         bookingId: 0,
         womenName: 'Mina Cummings',
@@ -43,8 +43,3 @@ const BOOKINGS: Booking[] = [
     },
 
 ]
-
-export default {
-    TABLE_HEAD_ITEMS,
-    BOOKINGS,
-}
