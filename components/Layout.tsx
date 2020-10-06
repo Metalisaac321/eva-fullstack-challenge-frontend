@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 import Head from 'next/head'
 import { evaIconInBase64 } from './constants'
+import Router from "next/router";
 
 type Props = {
   children?: ReactNode
@@ -20,6 +21,10 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
 )
 
 const Topbar = () => {
+  const logout = () => {
+    document.cookie = '';
+    Router.replace('/');
+  }
   return (
     <header className="justify-between items-center mx-auto border mb-4 h-20 flex flex-row text-white gradient-purple-to-red">
       <img
@@ -27,7 +32,7 @@ const Topbar = () => {
         src={evaIconInBase64}
         alt="eva-icon"
       />
-      <button className="text-2xl hover:text-blue-400 mr-4 focus:outline-none">
+      <button className="text-2xl hover:text-blue-400 mr-4 focus:outline-none" onClick={logout}>
         Logout
       </button>
     </header>

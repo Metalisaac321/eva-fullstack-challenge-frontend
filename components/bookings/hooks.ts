@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { fetcherFrontend } from "../../utils/fetcher";
+import { fetcher } from "../../utils/fetcher";
 import useFilterBookingsSection from "./FilterBookingsSection/hooks"
 import { Booking, Clinic, ConsumedMedication } from "./types";
 import moment from 'moment';
 import { MultiselectOption } from "./FilterBookingsSection/ConsumedMedicationMultiselect/types";
+import { getCookie } from "./get-cookie";
 
 const useBookings = (bookings: Booking[], clinics: Clinic[], consumedMedications: ConsumedMedication[]) => {
     const filterBookingsSectionsProps = useFilterBookingsSection();
@@ -14,6 +15,8 @@ const useBookings = (bookings: Booking[], clinics: Clinic[], consumedMedications
 
     const [data, setData] = useState(bookings);
     const [isLoading, setIsLoading] = useState(false);
+    const [isUserLogged, setIsUserLogged] = useState(true);
+
     const [filterBookings, setFilterBookings] = useState({
         page: 1,
         clinicName: '',
@@ -40,11 +43,19 @@ const useBookings = (bookings: Booking[], clinics: Clinic[], consumedMedications
         }
         const fetchBookings = async () => {
             setIsLoading(true);
-            const bookings = await fetcherFrontend('bookings', {
+            const access_token = getCookie('access_token');
+            const bookings = await fetcher('bookings', {
                 method: 'POST',
-                body: JSON.stringify(filterBookings)
-            })
-            setData(bookings);
+                access_token,
+                body: filterBookings
+            }, false)
+
+            if (bookings.statusCode == '401') {
+                setIsUserLogged(false)
+            } else {
+                setIsUserLogged(true);
+                setData(bookings);
+            }
             setIsLoading(false)
         }
         fetchBookings()
@@ -86,6 +97,7 @@ const useBookings = (bookings: Booking[], clinics: Clinic[], consumedMedications
         isLoading,
         page: filterBookings.page,
         changePage,
+        isUserLogged,
     }
 }
 

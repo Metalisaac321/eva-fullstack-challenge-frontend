@@ -1,29 +1,34 @@
 import fetch from 'isomorphic-fetch';
 
-export const fetcherBackend = async (url: string, options?: any) => {
-    try {
-        const response = await fetch(`http://backend:3000/api/${url}`, {
-            ...options,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-        return response.json();
-    } catch (error) {
-        console.log('error: ', error)
-    }
-};
+interface FetcherBackendOptions {
+    method: 'POST' | 'GET';
+    access_token?: string;
+    body?: Object;
+}
 
-export const fetcherFrontend = async (url: string, options?: any) => {
-    try {
-        const response = await fetch(`http://localhost:3000/api/${url}`, {
-            ...options,
-            headers: {
-                'Content-Type': 'application/json'
+export const fetcher = async (url: string, options?: FetcherBackendOptions, backend: boolean = true) => {
+    const fetchUrl = `http://${backend ? 'backend' : 'localhost'}:3000/api/${url}`;
+    let response;
+    const headersOption = {
+        headers: {
+            Authorization: `Bearer ${options?.access_token}`,
+            'Content-Type': 'application/json',
+        }
+    }
+    if (options?.method == 'GET') {
+        response = await fetch(fetchUrl, {
+            ...headersOption,
+        });
+    }
+    if (options?.method == 'POST') {
+        response = await fetch(fetchUrl, {
+            ...headersOption,
+            ...{
+                method: 'POST',
+                body: JSON.stringify(options.body)
             },
         })
-        return response.json();
-    } catch (error) {
-        console.log('error: ', error)
     }
+
+    return response.json();
 };
