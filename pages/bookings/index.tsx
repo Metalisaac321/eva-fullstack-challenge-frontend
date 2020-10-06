@@ -11,15 +11,29 @@ const Bookings = ({ bookings, clinics, consumedMedications }: InferGetStaticProp
     handleOnClickFilterButton,
     filterBookingsSectionsProps,
     isLoading,
+    page,
+    changePage,
   } = useBookings(bookings, clinics, consumedMedications);
 
   return (
     <Layout title="Bookings">
       <div className="flex flex-col px-6">
-        <FilterBookingsSection handleOnClickFilterButton={handleOnClickFilterButton}
+        <FilterBookingsSection
+          handleOnClickFilterButton={handleOnClickFilterButton}
           {...filterBookingsSectionsProps}
         />
         {!isLoading ? <BookingsTable bookings={data} /> : <p className="text-3xl">Loading...</p>}
+      </div>
+      <div className="flex flex-row justify-center my-4">
+        <button className="text-2xl focus:outline-none" onClick={changePage(-1)}>
+          {'<'}
+        </button>
+        <p className="mx-10 text-center text-2xl">
+          {page}
+        </p>
+        <button className="text-2xl focus:outline-none" onClick={changePage(1)}>
+          {'>'}
+        </button>
       </div>
     </Layout>
   )

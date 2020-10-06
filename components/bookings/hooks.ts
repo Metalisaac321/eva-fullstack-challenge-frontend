@@ -34,12 +34,11 @@ const useBookings = (bookings: Booking[], clinics: Clinic[], consumedMedications
     }, [])
 
     useEffect(() => {
-        console.log('should filter')
-        if (!filterBookings.clinicName && !filterBookings.date && filterBookings.consumedMedications.length < 1) {
+        const { clinicName, date, consumedMedications, page } = filterBookings;
+        if (!clinicName && !date && consumedMedications.length < 1 && !page) {
             return;
         }
         const fetchBookings = async () => {
-            console.log('fetch')
             setIsLoading(true);
             const bookings = await fetcherFrontend('bookings', {
                 method: 'POST',
@@ -49,8 +48,15 @@ const useBookings = (bookings: Booking[], clinics: Clinic[], consumedMedications
             setIsLoading(false)
         }
         fetchBookings()
-    }, [shouldFilter])
+    }, [shouldFilter, filterBookings.page])
 
+    const changePage = (n: number) => () => {
+        const pageNumber = filterBookings.page + (n)
+
+        if (pageNumber > 0) {
+            changeFilterBookings('page', pageNumber);
+        }
+    }
 
     const changeFilterBookings = (key: string, value: any) => {
         setFilterBookings({ ...filterBookings, [key]: value })
@@ -73,13 +79,13 @@ const useBookings = (bookings: Booking[], clinics: Clinic[], consumedMedications
         changeFilterBookings('filterMode', filterTypeConsumedMedicationsRadioButtonsProps.selectedOption);
     }, [filterTypeConsumedMedicationsRadioButtonsProps.selectedOption])
 
-    console.log(filterBookings)
-
     return {
         data,
         filterBookingsSectionsProps,
         handleOnClickFilterButton,
         isLoading,
+        page: filterBookings.page,
+        changePage,
     }
 }
 

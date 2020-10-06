@@ -4,7 +4,7 @@ export interface MultiselectOption {
 }
 
 export interface ClinicSelectProps {
-    options: MultiselectOption[];
-    value: MultiselectOption[];
+    options?: MultiselectOption[];
+    value?: MultiselectOption;
     onChange: (selectedOptions: any) => void;
 }

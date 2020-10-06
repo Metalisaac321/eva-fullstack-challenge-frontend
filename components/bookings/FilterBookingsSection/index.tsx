@@ -17,7 +17,7 @@ const Index = ({
                 Filter Bookings
             </p>
             <div className="grid grid-cols-3 gap-4">
-                <div>
+                <div className="flex flex-col">
                     <DateBookingInput {...dateBookingInputProps} />
                     <ClinicSelect {...clinicSelectProps} />
                 </div>
