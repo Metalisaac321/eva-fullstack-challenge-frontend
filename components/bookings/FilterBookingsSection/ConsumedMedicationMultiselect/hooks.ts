@@ -10,7 +10,7 @@ const optionsValues = [
 
 const useConsumedMedicationMultiselect = () => {
     const [options, setOptions] = useState<MultiselectOption[]>(optionsValues);
-    const [value, setValue] = useState([]);
+    const [value, setValue] = useState<MultiselectOption[]>([]);
 
     const onChange = (selectedOption) => {
         setValue(selectedOption);

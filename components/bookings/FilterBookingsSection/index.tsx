@@ -2,12 +2,14 @@ import ConsumedMedicationMultiselect from "./ConsumedMedicationMultiselect"
 import DateBookingInput from "./DateBookingInput";
 import FilterTypeConsumedMedicationsRadioButtons from './FilterTypeConsumedMedicationsRadioButtons'
 import { FilterBookingsSectionProps } from './types'
+import ClinicSelect from './ClinicSelect';
 
 const Index = ({
     consumedMedicationMultiselectProps,
     dateBookingInputProps,
     filterTypeConsumedMedicationsRadioButtonsProps,
     handleOnClickFilterButton,
+    clinicSelectProps,
 }: FilterBookingsSectionProps) => {
     return (
         <div className="mb-12 border p-3">
@@ -15,7 +17,10 @@ const Index = ({
                 Filter Bookings
             </p>
             <div className="grid grid-cols-3 gap-4">
-                <DateBookingInput {...dateBookingInputProps} />
+                <div>
+                    <DateBookingInput {...dateBookingInputProps} />
+                    <ClinicSelect {...clinicSelectProps} />
+                </div>
                 <div className="justify-self-center self-end">
                     <button
                         type="button"

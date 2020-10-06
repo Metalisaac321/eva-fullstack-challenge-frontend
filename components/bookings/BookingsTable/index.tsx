@@ -1,10 +1,9 @@
 import { TABLE_HEAD_ITEMS } from './constants';
 import { Fragment, memo } from 'react';
 import { BookingTableProps, BookingTableRowProps } from './types';
-
+import moment from 'moment';
 
 const BookingsTable = memo(({ bookings }: BookingTableProps) => {
-    console.log('Render BookingTable')
     return (
         <table className="table-auto border">
             <thead>
@@ -29,13 +28,15 @@ const BookingsTable = memo(({ bookings }: BookingTableProps) => {
     );
 });
 
-const BookingTableRow = ({ womenName, consumedMedications, clinicName, dateTimeBooking, womenEmail }: BookingTableRowProps) => (
+const BookingTableRow = ({ clinic, women, dateTime, consumedMedications }: BookingTableRowProps) => (
     <tr>
-        <td className="border px-4 py-2">{womenName}</td>
-        <td className="border px-4 py-2">{womenEmail}</td>
-        <td className="border px-4 py-2">{dateTimeBooking}</td>
-        <td className="border px-4 py-2">{clinicName}</td>
-        <td className="border px-4 py-2">{consumedMedications}</td>
+        <td className="border px-4 py-2">{women.name}</td>
+        <td className="border px-4 py-2">{women.email}</td>
+        <td className="border px-4 py-2">{moment(dateTime).utc().format('DD/MM/yyyy HH:mm')}</td>
+        <td className="border px-4 py-2">{clinic.name}</td>
+        <td className="border px-4 py-2">
+            {consumedMedications.map((consumedMedication) => consumedMedication.name).join()}
+        </td>
     </tr>
 )
 

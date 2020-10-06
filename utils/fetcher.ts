@@ -1,8 +1,29 @@
 import fetch from 'isomorphic-fetch';
 
-const fetcher = async (url: string) => {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/${url}`)
-    return response.json();
+export const fetcherBackend = async (url: string, options?: any) => {
+    try {
+        const response = await fetch(`http://backend:3000/api/${url}`, {
+            ...options,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        return response.json();
+    } catch (error) {
+        console.log('error: ', error)
+    }
 };
 
-export default fetcher;
+export const fetcherFrontend = async (url: string, options?: any) => {
+    try {
+        const response = await fetch(`http://localhost:3000/api/${url}`, {
+            ...options,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        return response.json();
+    } catch (error) {
+        console.log('error: ', error)
+    }
+};

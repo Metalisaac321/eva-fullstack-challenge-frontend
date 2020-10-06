@@ -1,14 +1,13 @@
-import Booking from "../types";
+import { Booking } from "../types";
 
 export interface BookingTableRowProps {
-    womenName: string;
-    womenEmail: string;
-    dateTimeBooking: string;
-    clinicName: string;
-    consumedMedications: string;
+    women: Booking['women'];
+    dateTime: string;
+    date: string;
+    clinic: Booking['clinic'];
+    consumedMedications: Booking['consumedMedications']
 }
 
 export interface BookingTableProps {
     bookings: Booking[]
-
 }

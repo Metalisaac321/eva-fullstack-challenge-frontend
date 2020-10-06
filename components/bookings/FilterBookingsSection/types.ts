@@ -1,3 +1,4 @@
+import { ClinicSelectProps } from "./ClinicSelect/types";
 import { ConsumedMedicationMultiselectProps } from "./ConsumedMedicationMultiselect/types";
 import { DateBookingInputProps } from "./DateBookingInput/types";
 import { FilterTypeConsumedMedicationsProps } from "./FilterTypeConsumedMedicationsRadioButtons/types";
@@ -5,6 +6,7 @@ import { FilterTypeConsumedMedicationsProps } from "./FilterTypeConsumedMedicati
 export interface FilterBookingsSectionProps {
     dateBookingInputProps: DateBookingInputProps;
     filterTypeConsumedMedicationsRadioButtonsProps: FilterTypeConsumedMedicationsProps;
-    handleOnClickFilterButton: () => void,
-    consumedMedicationMultiselectProps: ConsumedMedicationMultiselectProps
+    handleOnClickFilterButton: () => void;
+    consumedMedicationMultiselectProps: ConsumedMedicationMultiselectProps;
+    clinicSelectProps: ClinicSelectProps;
 }

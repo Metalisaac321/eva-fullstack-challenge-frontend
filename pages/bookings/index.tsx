@@ -1,31 +1,47 @@
-import { GetStaticProps } from 'next'
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import Layout from '../../components/Layout'
-import fetcher from '../../utils/fetcher';
+import { fetcherBackend } from '../../utils/fetcher';
 import BookingsTable from '../../components/bookings/BookingsTable';
 import useBookings from '../../components/bookings/hooks';
 import FilterBookingsSection from '../../components/bookings/FilterBookingsSection';
 
-const Bookings = () => {
+const Bookings = ({ bookings, clinics, consumedMedications }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const {
+    data,
+    handleOnClickFilterButton,
     filterBookingsSectionsProps,
-    bookings,
-  } = useBookings();
+    isLoading,
+  } = useBookings(bookings, clinics, consumedMedications);
 
   return (
     <Layout title="Bookings">
       <div className="flex flex-col px-6">
-        <FilterBookingsSection {...filterBookingsSectionsProps} />
-        <BookingsTable bookings={bookings} />
+        <FilterBookingsSection handleOnClickFilterButton={handleOnClickFilterButton}
+          {...filterBookingsSectionsProps}
+        />
+        {!isLoading ? <BookingsTable bookings={data} /> : <p className="text-3xl">Loading...</p>}
       </div>
     </Layout>
   )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const items = await fetcher('users');
+  const bookings = await fetcherBackend('bookings', {
+    method: 'POST',
+    body: JSON.stringify({
+      page: 1
+    })
+  });
+
+  const consumedMedications = await fetcherBackend('consumed-medications');
+  const clinics = await fetcherBackend('clinics');
 
   return {
-    props: { items }
+    props: {
+      bookings,
+      consumedMedications,
+      clinics,
+    }
   }
 }
 
