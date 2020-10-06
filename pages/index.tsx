@@ -1,31 +1,62 @@
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import Layout from '../components/Layout'
+import { fetcherBackend } from '../utils/fetcher';
+import BookingsTable from '../components/bookings/BookingsTable';
+import useBookings from '../components/bookings/hooks';
+import FilterBookingsSection from '../components/bookings/FilterBookingsSection';
 
-const Index = () => {
+const Bookings = ({ bookings, clinics, consumedMedications }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const {
+    data,
+    handleOnClickFilterButton,
+    filterBookingsSectionsProps,
+    isLoading,
+    page,
+    changePage,
+  } = useBookings(bookings, clinics, consumedMedications);
+
   return (
-    <div className="bg-grey-lighter h-screen font-sans" >
-      <div className="container mx-auto h-full flex justify-center items-center">
-        <div className="w-1/3">
-          <h1 className="font-hairline mb-6 text-center text-4xl">Login</h1>
-          <div className="border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg">
-            <div className="mb-4">
-              <label className="font-bold text-grey-darker block mb-2">Username or Email</label>
-              <input type="text" className="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow" placeholder="Your Username" />
-            </div>
-
-            <div className="mb-4">
-              <label className="font-bold text-grey-darker block mb-2">Password</label>
-              <input type="text" className="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow" placeholder="Your Password" />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <button className="bg-teal-dark hover:bg-teal text-white font-bold py-2 px-4 rounded">
-                Login
-              </button>
-            </div>
-          </div>
-        </div>
+    <Layout title="Bookings">
+      <div className="flex flex-col px-6">
+        <FilterBookingsSection
+          handleOnClickFilterButton={handleOnClickFilterButton}
+          {...filterBookingsSectionsProps}
+        />
+        {!isLoading ? <BookingsTable bookings={data} /> : <p className="text-3xl">Loading...</p>}
       </div>
-    </div>
+      <div className="flex flex-row justify-center my-4">
+        <button className="text-2xl focus:outline-none" onClick={changePage(-1)}>
+          {'<'}
+        </button>
+        <p className="mx-10 text-center text-2xl">
+          {page}
+        </p>
+        <button className="text-2xl focus:outline-none" onClick={changePage(1)}>
+          {'>'}
+        </button>
+      </div>
+    </Layout>
   )
-};
+}
 
-export default Index;
+export const getStaticProps: GetStaticProps = async () => {
+  const bookings = await fetcherBackend('bookings', {
+    method: 'POST',
+    body: JSON.stringify({
+      page: 1
+    })
+  });
+
+  const consumedMedications = await fetcherBackend('consumed-medications');
+  const clinics = await fetcherBackend('clinics');
+
+  return {
+    props: {
+      bookings,
+      consumedMedications,
+      clinics,
+    }
+  }
+}
+
+export default Bookings;
